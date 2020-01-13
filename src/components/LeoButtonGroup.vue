@@ -11,8 +11,8 @@ const TYPE = [
   "primary",
   "secondary",
   "success",
+  "warning",
   "danger",
-  "error",
   "info"
 ];
 export default {

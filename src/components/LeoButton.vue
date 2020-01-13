@@ -8,9 +8,8 @@
     <LeoIcon
       :icon="loading ? 'lzh-loading' : icon"
       v-if="icon || loading"
-      class="iconfont"
     ></LeoIcon>
-    <span v-if="this.$slots.default">
+    <span>
       <slot v-if="!(loading && loadingText)"></slot>
       <template v-else>{{ loadingText }}</template>
     </span>
@@ -103,7 +102,7 @@ export default {
           "leo-button--round-right": !!this.round_right,
           "leo-button--disabled":
             this.loading || this.disabled_from_group || !!this.disabled,
-          "leo-button--circle": !!this.circle,
+          "leo-button--circle": !this.$slots.default && !!this.circle,
           "leo-button--loading": !!this.loading,
           "leo-button--full-width": !!this.full,
           "leo-button--icon-right":
@@ -192,7 +191,7 @@ export default {
   &.leo-button--disabled:active,
   &.leo-button--disabled:focus,
   &.leo-button--disabled:hover {
-    background: #fafafa;
+    background: #fff;
     color: $main_text;
     border-color: $default;
   }

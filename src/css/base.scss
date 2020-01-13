@@ -1,10 +1,16 @@
-$primary: #2979ff;$primary_30:#2979ff30;
-$secondary: #827717;$secondary_30: #82771730;
-$success: #43a047;$success_30: #43a04730;
-$warning: #e65100;$warning_30: #e6510030;
-$danger: #dd2c00;$danger_30: #dd2c0030;
-$info: #757575; $info_30: #75757530 ; 
-$default:#bdbdbd;
+$primary: #2979ff;
+$primary_30: #2979ff30;
+$secondary: #827717;
+$secondary_30: #82771730;
+$success: #43a047;
+$success_30: #43a04730;
+$warning: #e65100;
+$warning_30: #e6510030;
+$danger: #dd2c00;
+$danger_30: #dd2c0030;
+$info: #757575;
+$info_30: #75757530;
+$default: #bdbdbd;
 $disabled: #eeeeee;
 
 $main_text: #333;
@@ -17,28 +23,28 @@ $m_text: 14px;
 $l_text: 16px;
 $g_text: 18px;
 
-$border-radius:4px;
-$border:1px solid;
+$border-radius: 4px;
+$border: 1px solid;
 
-.primary{
-  color:$primary;
+.primary {
+  color: $primary;
 }
 
-.primary{
-  color:$primary
+.primary {
+  color: $primary;
 }
-.secondary{
-  color:$secondary
+.secondary {
+  color: $secondary;
 }
-.success{
-  color:$success
+.success {
+  color: $success;
 }
-.warning{
-  color:$warning
+.warning {
+  color: $warning;
 }
-.danger{
-  color:$danger
+.danger {
+  color: $danger;
 }
-.info{
-  color:$info
+.info {
+  color: $info;
 }

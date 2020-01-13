@@ -2,72 +2,53 @@
   <main>
     <section>
       <input type="text" v-model="loadingText" />
-      <hr />
-      <template v-for="(v, item) in data.TYPE">
-        <input
-          type="radio"
-          :id="'type_' + item"
-          v-model="type"
+      <div>
+        <span
+          v-for="(v, item) in data.TYPE"
           :key="item"
-          :value="item"
-        />
-        <label
-          :for="'type_' + item"
-          :key="item + 1"
-          style="margin:0 8px"
-          :class="item"
-          >{{ v }}</label
+          @click="type = item"
+          class="radio"
+          :class="[{ active: type === item }, item]"
         >
-      </template>
-      <hr />
-      <template v-for="(v, item) in data.SIZE">
-        <input
-          type="radio"
-          :id="'type_' + item"
-          v-model="size"
+          {{ v }}
+        </span>
+      </div>
+      <div>
+        <span
+          v-for="(v, item) in data.SIZE"
           :key="item"
-          :value="item"
-        />
-        <label
-          :for="'type_' + item"
-          :key="item + 1"
-          style="margin-right:16px"
-          >{{ v }}</label
+          @click="size = item"
+          class="radio"
+          :class="[{ active: size === item }]"
         >
-      </template>
-      <hr />
-      <template v-for="(v, item) in data.ICON">
-        <input
-          type="radio"
-          :id="'type_' + item"
-          v-model="icon"
+          {{ v }}
+        </span>
+      </div>
+      <div>
+        <span
+          v-for="(v, item) in data.ICON"
           :key="item"
-          :value="v"
-        />
-        <label
-          :for="'type_' + item"
-          :key="item + 1"
-          style="margin-right:16px"
-          >{{ v }}</label
+          @click="icon = item"
+          class="radio"
+          :class="[{ active: icon === item }]"
         >
-      </template>
-      <hr />
-      <template v-for="(v, item) in data.ICON_POSITION">
-        <input
-          type="radio"
-          :id="'type_' + item"
-          v-model="iconPosition"
+          <span class="iconfont" :class="item">
+            {{ v }}
+          </span>
+        </span>
+      </div>
+      <div>
+        <span
+          v-for="(v, item) in data.ICON_POSITION"
           :key="item"
-          :value="v"
-        />
-        <label
-          :for="'type_' + item"
-          :key="item + 1"
-          style="margin-right:16px"
-          >{{ v }}</label
+          @click="iconPosition = item"
+          class="radio "
+          :class="[{ active: iconPosition === item }]"
         >
-      </template>
-      <hr />
+          {{ v }}
+        </span>
+      </div>
+      <div></div>
       <input type="checkbox" v-model="plain" id="plain" />
       <label for="plain">朴素按钮</label>
       <input type="checkbox" v-model="round" id="round" />
@@ -83,7 +64,7 @@
       <hr />
       <leo-button
         v-for="index in 2"
-        :key="index"
+        :key="index + '---'"
         :type="type"
         :size="size"
         :plain="plain"
@@ -99,11 +80,26 @@
         @contextMenu.prevent="xxx"
         >{{ data.TYPE[type] }}</leo-button
       >
+      <leo-button
+        :type="type"
+        :size="size"
+        :plain="plain"
+        :round="round"
+        :circle="circle"
+        :disabled="disabled"
+        :loading="loading"
+        :loadingText="loadingText"
+        :iconPosition="iconPosition"
+        icon="lzh-loading"
+        :full="full"
+        @click="xxx"
+        @contextMenu.prevent="xxx"
+      ></leo-button>
       <hr />
       <LeoButtonGroup :type="type" :size="size" :round="round">
         <leo-button
           v-for="index in 6"
-          :key="index"
+          :key="index + '+++'"
           :plain="plain"
           :round="round"
           :circle="circle"
@@ -138,7 +134,7 @@ const TYPE = {
   danger: "危险按钮",
   info: "提示按钮"
 };
-const ICON_POSITION = ["left", "right"];
+const ICON_POSITION = { left: "左ICON", right: "右ICON" };
 import Vue from "vue";
 import LeoButton from "components/LeoButton.vue";
 import LeoButtonGroup from "components/LeoButtonGroup.vue";
@@ -152,12 +148,13 @@ export default Vue.extend({
       data: {
         TYPE,
         SIZE,
-        ICON: [
-          "lzh-up-arrow",
-          "lzh-left-arrow",
-          "lzh-right-arrow",
-          "lzh-loading"
-        ],
+        ICON: {
+          "lzh-up-arrow": "上箭头",
+          "lzh-left-arrow": "左箭头",
+          "lzh-right-arrow": "右箭头",
+          "lzh-down-arrow": "下箭头",
+          "lzh-loading": "加载"
+        },
         ICON_POSITION
       },
       type: "default",
@@ -165,7 +162,7 @@ export default Vue.extend({
       plain: false,
       round: false,
       circle: false,
-      disabled: true,
+      disabled: false,
       loading: false,
       iconPosition: "left",
       loadingText: "加载中...",
@@ -181,4 +178,14 @@ export default Vue.extend({
   }
 });
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+.radio {
+  display: inline-block;
+  margin: 4px;
+  padding: 4px;
+  border: 2px dashed #aaa;
+}
+.active {
+  border: 2px solid purple;
+}
+</style>
