@@ -8,7 +8,7 @@ function resolve(dir) {
 module.exports = {
   publicPath: "/",
   assetsDir: "publice",
-  outputDir: "../dists/", // 打包的目录
+  outputDir: "./dists/", // 打包的目录
   lintOnSave: true, // 在保存时校验格式
   productionSourceMap: false, // 生产环境是否生成 SourceMap
   filenameHashing: true,
@@ -22,7 +22,7 @@ module.exports = {
       .set("font", resolve("src/assets/font"))
       .set("views", resolve("src/views"))
       .set("components", resolve("src/components"))
-      .set("js", resolve("src/js"))
+      .set("js", resolve("src/js"));
 
     config.module
       .rule("images")

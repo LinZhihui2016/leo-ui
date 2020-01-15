@@ -9,7 +9,7 @@
       :icon="loading ? 'lzh-loading' : icon"
       v-if="icon || loading"
     ></LeoIcon>
-    <span>
+    <span :class="{ 'leo-button--noslot': !$slots.default }">
       <slot v-if="!(loading && loadingText)"></slot>
       <template v-else>{{ loadingText }}</template>
     </span>
@@ -113,9 +113,15 @@ export default {
   },
   methods: {
     on_click_left(e) {
+      if (this.loading || this.disabled) {
+        return;
+      }
       this.$emit("click", e);
     },
     on_click_right(e) {
+      if (this.loading || this.disabled) {
+        return;
+      }
       this.$emit("contextMenu", e);
     }
   }
@@ -145,13 +151,13 @@ export default {
   & + .leo-button {
     margin-left: 8px;
   }
-  .iconfont + span {
+  .iconfont + span:not(.leo-button--noslot) {
     margin-left: 4px;
     margin-right: 0;
   }
   &.leo-button--icon-right {
     flex-direction: row-reverse;
-    .iconfont + span {
+    .iconfont + span:not(.leo-button--noslot) {
       margin-left: 0;
       margin-right: 4px;
     }
