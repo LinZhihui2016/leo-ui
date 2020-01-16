@@ -1,10 +1,13 @@
-import chai, { expect } from "chai";
+const expect = chai.expect;
 import { describe, it } from "mocha";
 import spies from "chai-spies";
+import sinon from "sinon";
+import sinonChai from "sinon-chai";
 import Vue from "vue";
 import LeoButton from "components/LeoButton.vue";
+import { CreateTest, RemoveTest } from "./tool";
 chai.use(spies);
-
+chai.use(sinonChai);
 Vue.config.productionTip = false;
 Vue.config.devtools = false;
 
@@ -163,22 +166,10 @@ const TYPE: Array<Type> = [
   "info"
 ];
 const SIZE: Array<Size> = ["small", "medium", "large", "giant"];
-const CreateTest = (prop: Object): Vue => {
-  let div: HTMLElement = document.createElement("div");
-  div.id = "test";
-  document.body.appendChild(div);
-  const Constuctor = Vue.extend(LeoButton);
-  const _vm = new Constuctor({
-    ...prop,
-    template: "测试"
-  });
-  _vm.$mount("#test");
-  return _vm;
+const _CreateTest = (prop?: Object): Vue => {
+  return CreateTest(prop || {}, LeoButton, "测试");
 };
-const RemoveTest = (_vm: Vue) => {
-  _vm.$el.remove();
-  _vm.$destroy();
-};
+
 const IconTest = (icon: Icon, _vm: Vue): string[] | null => {
   let iconElement = _vm.$el.querySelector(".iconfont");
   let classList = iconElement && iconElement.className.split(" ");
@@ -210,14 +201,19 @@ const TypeTest = (type: Type, plain: Boolean, _vm: Vue) => {
 };
 
 const onClickTest = (_vm: Vue, shouldBeCalled: boolean) => {
-  const spy = chai.spy(() => {});
-  _vm.$on("click", spy);
+  const callback = sinon.fake();
+  _vm.$on("click", callback); //点击的时候触发spy
   let el = _vm.$el as HTMLElement;
-  el.click();
+  // let event = new Event("click");
+  // el && el.dispatchEvent(event);
+  el.click(); //点击
   if (shouldBeCalled) {
-    expect(spy).to.have.been.called();
+    //如果这个按钮可以点击
+    //期望 这个 间谍 被 调用
+    expect(callback).to.have.been.called;
   } else {
-    expect(spy).to.not.have.been.called();
+    //期望 这个 间谍 没有 被 调用
+    expect(callback).to.not.have.been.called;
   }
 };
 const FullWidthTest = (_vm: Vue) => {
@@ -234,14 +230,14 @@ const HeightTest = (_vm: Vue, size: Size) => {
 };
 
 const ButtonIconTest = ({ icon }: { icon: Icon }): void => {
-  const _vm = CreateTest({ propsData: { icon } });
+  const _vm = _CreateTest({ propsData: { icon } });
   IconTest(icon, _vm);
   HeightTest(_vm, "large");
   IconPositionTest("left", _vm);
   RemoveTest(_vm);
 };
 const ButtonLoadingTest = ({ icon }: { icon: Icon }): void => {
-  const _vm = CreateTest({ propsData: { icon, loading: true } });
+  const _vm = _CreateTest({ propsData: { icon, loading: true } });
   if (icon !== "lzh-loading") {
     const classList = IconTest("lzh-loading", _vm);
     expect(classList).to.not.include(icon);
@@ -252,7 +248,7 @@ const ButtonLoadingTest = ({ icon }: { icon: Icon }): void => {
   RemoveTest(_vm);
 };
 const ButtonIconRightTest = ({ icon }: { icon: Icon }): void => {
-  const _vm = CreateTest({ propsData: { icon, iconPosition: "right" } });
+  const _vm = _CreateTest({ propsData: { icon, iconPosition: "right" } });
   IconPositionTest("right", _vm);
   HeightTest(_vm, "large");
   RemoveTest(_vm);
@@ -262,7 +258,7 @@ const ButtonLoadingTextTest = ({
 }: {
   loadingText: LoadingText;
 }): void => {
-  const _vm = CreateTest({
+  const _vm = _CreateTest({
     propsData: { loading: true, loadingText }
   });
   LoadingTextTest(loadingText, _vm);
@@ -279,7 +275,7 @@ const ButtonTypeTest = ({
   type: Type;
   plain: Boolean;
 }): void => {
-  const _vm = CreateTest({
+  const _vm = _CreateTest({
     propsData: { type, plain, icon: "lzh-up-arrow" }
   });
   TypeTest(type, plain, _vm);
@@ -289,7 +285,7 @@ const ButtonTypeTest = ({
 };
 
 const ButtonDisabledTest = (): void => {
-  const _vm = CreateTest({
+  const _vm = _CreateTest({
     propsData: { disabled: true }
   });
   HeightTest(_vm, "large");
@@ -298,7 +294,7 @@ const ButtonDisabledTest = (): void => {
 };
 
 const ButtonFullWidthTest = (): void => {
-  const _vm = CreateTest({
+  const _vm = _CreateTest({
     propsData: { full: true }
   });
   onClickTest(_vm, true);
@@ -308,12 +304,13 @@ const ButtonFullWidthTest = (): void => {
 };
 
 const ButtonSizeTest = ({ size }: { size: Size }): void => {
-  const _vm = CreateTest({
+  const _vm = _CreateTest({
     propsData: { size }
   });
   HeightTest(_vm, size);
   RemoveTest(_vm);
 };
+
 type Icon =
   | "lzh-up-arrow"
   | "lzh-left-arrow"
@@ -330,47 +327,61 @@ describe("Button", () => {
   it("存在。", () => {
     expect(LeoButton).to.be.ok;
   });
+  describe("props", () => {
+    it("可以设置Icon", () => {
+      ICON.forEach(key => {
+        ButtonIconTest({ icon: key });
+      });
+    });
 
-  it("可以设置Icon", () => {
-    ICON.forEach(key => {
-      ButtonIconTest({ icon: key });
+    it("可以设置icon的位置", () => {
+      ICON.forEach(key => {
+        ButtonIconRightTest({ icon: key });
+      });
     });
-  });
+    it("可以设置loading状态", () => {
+      ICON.forEach(key => {
+        ButtonLoadingTest({ icon: key });
+      });
+    });
+    const LOADING_TEXT: Array<LoadingText> = ["测试", "加载中", "我要测试"];
+    it("可以设置loading的文字", () => {
+      LOADING_TEXT.forEach(key => ButtonLoadingTextTest({ loadingText: key }));
+    });
+    it("可以设置朴素按钮的样式", () => {
+      TYPE.forEach(key => {
+        ButtonTypeTest({ type: key, plain: true });
+      });
+    });
+    it("可以设置非朴素按钮的样式", () => {
+      TYPE.forEach(key => {
+        ButtonTypeTest({ type: key, plain: false });
+      });
+    });
 
-  it("可以设置icon的位置", () => {
-    ICON.forEach(key => {
-      ButtonIconRightTest({ icon: key });
+    it("可以设置满宽度", () => {
+      ButtonFullWidthTest();
+    });
+    it("可以设置四种大小", () => {
+      SIZE.forEach(key => {
+        ButtonSizeTest({ size: key });
+      });
     });
   });
-  it("可以设置loading状态", () => {
-    ICON.forEach(key => {
-      ButtonLoadingTest({ icon: key });
+  describe("event", () => {
+    it("点击事件", () => {
+      const _vm = _CreateTest({
+        propsData: {}
+      });
+      onClickTest(_vm, true);
     });
-  });
-
-  const LOADING_TEXT: Array<LoadingText> = ["测试", "加载中", "我要测试"];
-  it("可以设置loading的文字", () => {
-    LOADING_TEXT.forEach(key => ButtonLoadingTextTest({ loadingText: key }));
-  });
-  it("可以设置朴素按钮的样式", () => {
-    TYPE.forEach(key => {
-      ButtonTypeTest({ type: key, plain: true });
+    it("可以设置禁用状态", () => {
+      ButtonDisabledTest();
     });
-  });
-  it("可以设置非朴素按钮的样式", () => {
-    TYPE.forEach(key => {
-      ButtonTypeTest({ type: key, plain: false });
-    });
-  });
-  it("可以设置禁用状态", () => {
-    ButtonDisabledTest();
-  });
-  it("可以设置满宽度", () => {
-    ButtonFullWidthTest();
-  });
-  it("可以设置四种大小", () => {
-    SIZE.forEach(key => {
-      ButtonSizeTest({ size: key });
+    it("可以设置loading状态", () => {
+      ICON.forEach(key => {
+        ButtonLoadingTest({ icon: key });
+      });
     });
   });
 });

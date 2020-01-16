@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <header class="flex-center">
+    <header>
       <router-link to="/button">
         Button
+      </router-link>
+      <router-link to="/input">
+        Input
       </router-link>
     </header>
     <router-view class="flex-center"></router-view>
@@ -20,5 +23,8 @@ export default Vue.extend({
 @import url("css/common.scss");
 header {
   margin-bottom: 10px;
+  a {
+    display: block;
+  }
 }
 </style>
