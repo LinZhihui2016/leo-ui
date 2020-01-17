@@ -148,7 +148,7 @@ export default {
     z-index: 1;
   }
 
-  & + .leo-button {
+  & + .leo-button:not(.leo-button--full-width) {
     margin-left: 8px;
   }
   .iconfont + span:not(.leo-button--noslot) {
