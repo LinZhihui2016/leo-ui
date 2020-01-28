@@ -1,10 +1,6 @@
 <template>
   <div class="leo-input--wrap" :class="_class">
-    <div
-      class="leo-input--inner-left"
-      v-if="iconLeft"
-      :style="_style_left_icon"
-    >
+    <div class="leo-input--inner-left" v-if="iconLeft">
       <span class="leo-input--icon">
         <leo-icon :icon="iconLeft"></leo-icon>
       </span>

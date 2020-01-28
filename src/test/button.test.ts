@@ -45,115 +45,91 @@ enum Height {
   "giant" = "40px"
 }
 
-interface StyleColors {
-  color: Color;
-  backgroundColor: Color;
-  borderColor: Color;
-}
-interface ButtonColorType {
-  origin: StyleColors;
-  plain: StyleColors;
-}
-class SizeHash {
-  small = Height.small;
-  medium = Height.medium;
-  large = Height.large;
-  giant = Height.giant;
-}
 class TypeHash {
-  default: ButtonColorType;
-  primary: ButtonColorType;
-  secondary: ButtonColorType;
-  success: ButtonColorType;
-  warning: ButtonColorType;
-  danger: ButtonColorType;
-  info: ButtonColorType;
-  constructor() {
-    this.default = {
-      origin: {
-        color: Color.text,
-        backgroundColor: Color.white,
-        borderColor: Color.default
-      },
-      plain: {
-        color: Color.text,
-        backgroundColor: Color.white,
-        borderColor: Color.default
-      }
-    };
-    this.primary = {
-      origin: {
-        color: Color.white,
-        backgroundColor: Color.primary,
-        borderColor: Color.primary
-      },
-      plain: {
-        color: Color.primary,
-        backgroundColor: Color.primary_30,
-        borderColor: Color.primary_30
-      }
-    };
-    this.secondary = {
-      origin: {
-        color: Color.white,
-        backgroundColor: Color.secondary,
-        borderColor: Color.secondary
-      },
-      plain: {
-        color: Color.secondary,
-        backgroundColor: Color.secondary_30,
-        borderColor: Color.secondary_30
-      }
-    };
-    this.success = {
-      origin: {
-        color: Color.white,
-        backgroundColor: Color.success,
-        borderColor: Color.success
-      },
-      plain: {
-        color: Color.success,
-        backgroundColor: Color.success_30,
-        borderColor: Color.success_30
-      }
-    };
-    this.warning = {
-      origin: {
-        color: Color.white,
-        backgroundColor: Color.warning,
-        borderColor: Color.warning
-      },
-      plain: {
-        color: Color.warning,
-        backgroundColor: Color.warning_30,
-        borderColor: Color.warning_30
-      }
-    };
-    this.danger = {
-      origin: {
-        color: Color.white,
-        backgroundColor: Color.danger,
-        borderColor: Color.danger
-      },
-      plain: {
-        color: Color.danger,
-        backgroundColor: Color.danger_30,
-        borderColor: Color.danger_30
-      }
-    };
-    this.info = {
-      origin: {
-        color: Color.white,
-        backgroundColor: Color.info,
-        borderColor: Color.info
-      },
-      plain: {
-        color: Color.info,
-        backgroundColor: Color.info_30,
-        borderColor: Color.info_30
-      }
-    };
-  }
+  default = {
+    origin: {
+      color: Color.text,
+      backgroundColor: Color.white,
+      borderColor: Color.default
+    },
+    plain: {
+      color: Color.text,
+      backgroundColor: Color.white,
+      borderColor: Color.default
+    }
+  };
+  primary = {
+    origin: {
+      color: Color.white,
+      backgroundColor: Color.primary,
+      borderColor: Color.primary
+    },
+    plain: {
+      color: Color.primary,
+      backgroundColor: Color.primary_30,
+      borderColor: Color.primary_30
+    }
+  };
+  secondary = {
+    origin: {
+      color: Color.white,
+      backgroundColor: Color.secondary,
+      borderColor: Color.secondary
+    },
+    plain: {
+      color: Color.secondary,
+      backgroundColor: Color.secondary_30,
+      borderColor: Color.secondary_30
+    }
+  };
+  success = {
+    origin: {
+      color: Color.white,
+      backgroundColor: Color.success,
+      borderColor: Color.success
+    },
+    plain: {
+      color: Color.success,
+      backgroundColor: Color.success_30,
+      borderColor: Color.success_30
+    }
+  };
+  warning = {
+    origin: {
+      color: Color.white,
+      backgroundColor: Color.warning,
+      borderColor: Color.warning
+    },
+    plain: {
+      color: Color.warning,
+      backgroundColor: Color.warning_30,
+      borderColor: Color.warning_30
+    }
+  };
+  danger = {
+    origin: {
+      color: Color.white,
+      backgroundColor: Color.danger,
+      borderColor: Color.danger
+    },
+    plain: {
+      color: Color.danger,
+      backgroundColor: Color.danger_30,
+      borderColor: Color.danger_30
+    }
+  };
+  info = {
+    origin: {
+      color: Color.white,
+      backgroundColor: Color.info,
+      borderColor: Color.info
+    },
+    plain: {
+      color: Color.info,
+      backgroundColor: Color.info_30,
+      borderColor: Color.info_30
+    }
+  };
 }
 
 const TYPE: Array<Type> = [
@@ -225,8 +201,7 @@ const FullWidthTest = (_vm: Vue) => {
 
 const HeightTest = (_vm: Vue, size: Size) => {
   let { height } = window.getComputedStyle(_vm.$el);
-  let heights = new SizeHash();
-  expect(height).to.eq(heights[size]);
+  expect(height).to.eq(Height[size]);
 };
 
 const ButtonIconTest = ({ icon }: { icon: Icon }): void => {
