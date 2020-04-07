@@ -17,7 +17,8 @@ export default {
       justify && (style.justify = justify);
       align && (style.align = align);
       if (gutter) {
-        style.margin = `0 -${gutter / 2}px`;
+        style.marginLeft = `-${gutter / 2}px`;
+        style.marginRight = `-${gutter / 2}px`;
       }
       return style;
     }

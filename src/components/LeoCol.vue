@@ -19,15 +19,16 @@ export default {
       const { gutter } = this;
       let style = {};
       if (gutter) {
-        style.padding = `0 ${gutter / 2}px`;
+        style.paddingLeft = `${gutter / 2}px`;
+        style.paddingRight = `${gutter / 2}px`;
       }
       return style;
     },
     classList() {
       const { span, preSpan } = this;
       return [
-        { [`leo-col--span-${span}`]: span },
-        { [`leo-col--pre-${preSpan}`]: preSpan }
+        span && `leo-col--span-${span}`,
+        preSpan && `leo-col--pre-${preSpan}`
       ];
     }
   }
