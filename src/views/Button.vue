@@ -3,7 +3,7 @@
     <section>
       <input type="text" v-model="loadingText" />
       <div>
-        <span
+        <leo-button
           v-for="(v, item) in data.TYPE"
           :key="item"
           @click="type = item"
@@ -11,10 +11,10 @@
           :class="[{ active: type === item }, item]"
         >
           {{ v }}
-        </span>
+        </leo-button>
       </div>
       <div>
-        <span
+        <leo-button
           v-for="(v, item) in data.SIZE"
           :key="item"
           @click="size = item"
@@ -22,10 +22,10 @@
           :class="[{ active: size === item }]"
         >
           {{ v }}
-        </span>
+        </leo-button>
       </div>
       <div>
-        <span
+        <leo-button
           v-for="(v, item) in data.ICON"
           :key="item"
           @click="icon = item"
@@ -35,10 +35,10 @@
           <span class="iconfont" :class="item">
             {{ v }}
           </span>
-        </span>
+        </leo-button>
       </div>
       <div>
-        <span
+        <leo-button
           v-for="(v, item) in data.ICON_POSITION"
           :key="item"
           @click="iconPosition = item"
@@ -46,7 +46,7 @@
           :class="[{ active: iconPosition === item }]"
         >
           {{ v }}
-        </span>
+        </leo-button>
       </div>
       <div></div>
       <input type="checkbox" v-model="plain" id="plain" />
@@ -63,8 +63,6 @@
       <label for="full">满宽度</label>
       <hr />
       <leo-button
-        v-for="index in 2"
-        :key="index + '---'"
         :type="type"
         :size="size"
         :plain="plain"

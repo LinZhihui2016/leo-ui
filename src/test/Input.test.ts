@@ -41,11 +41,11 @@ const PasswordTypeTest = (_vm: Vue) => {
 const IconClickTest = (_vm: Vue, value: any, icon: string) => {
   if (value) {
     const iconFont = _vm.$el.querySelector(`.${icon}`);
-    const iconSpan = iconFont && iconFont.parentElement;
+    const iconSpan = iconFont!.parentElement as HTMLElement;
     const callback = sinon.fake();
     expect(iconSpan).to.be.ok;
-    (iconSpan as HTMLElement).addEventListener("click", callback);
-    (iconSpan as HTMLElement).click();
+    iconSpan.addEventListener("click", callback);
+    iconSpan.click();
     expect(callback).to.have.been.called;
   } else {
     const iconFonts = _vm.$el.querySelectorAll(".iconfont");

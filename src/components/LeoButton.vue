@@ -137,6 +137,7 @@ export default {
   border: 1px solid $default;
   outline: 0;
   font-size: $m_text;
+  user-select: none;
   cursor: pointer;
   transition: all 0.2s;
   &:hover {
@@ -151,6 +152,7 @@ export default {
   & + .leo-button:not(.leo-button--full-width) {
     margin-left: 8px;
   }
+
   .iconfont + span:not(.leo-button--noslot) {
     margin-left: 4px;
     margin-right: 0;

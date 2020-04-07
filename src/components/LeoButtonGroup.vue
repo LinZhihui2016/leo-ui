@@ -59,31 +59,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.leo-button-group > .leo-button {
-  margin-left: -1px;
-  border-radius: 0;
-  position: relative;
-  &:hover {
-    z-index: 2;
-  }
-  border-left-color: $default;
-  border-right-color: $default;
-  &:first-child {
-    margin-left: 0;
-  }
-  &:first-child {
-    border-top-left-radius: $border-radius;
-    border-bottom-left-radius: $border-radius;
-  }
-  &:last-child {
-    border-top-right-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
-  }
-  &.leo-button--disabled:active,
-  &.leo-button--disabled:focus,
-  &.leo-button--disabled:hover {
+.leo-button-group {
+  .leo-button {
+    & + .leo-button {
+      margin-left: -1px;
+    }
+    border-radius: 0;
+    position: relative;
+    &:hover {
+      z-index: 2;
+    }
     border-left-color: $default;
     border-right-color: $default;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:first-child {
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+    }
+    &:last-child {
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+    &.leo-button--disabled:active,
+    &.leo-button--disabled:focus,
+    &.leo-button--disabled:hover {
+      border-left-color: $default;
+      border-right-color: $default;
+    }
   }
 }
 </style>
