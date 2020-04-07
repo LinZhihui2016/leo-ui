@@ -77,7 +77,7 @@
         </LeoInputGroup>
       </div>
       <div>
-        <LeoInput v-model="text" label="你好你好"></LeoInput>
+        <LeoInput v-model="text" :autofocus="true"></LeoInput>
       </div>
 
       <p>{{ text }}</p>

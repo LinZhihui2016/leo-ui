@@ -97,7 +97,7 @@ describe("Input", () => {
     expect(LeoInput).to.be.ok;
   });
   describe("props", () => {
-    it("可以接受value，并且可以修改", () => {
+    it("可以传入value，并且可以修改", () => {
       const List = [123, "123", null, undefined];
       List.forEach(value => {
         const _vm = _CreateTest({ propsData: { type: "text", value } });
@@ -109,6 +109,12 @@ describe("Input", () => {
         EventTest(_vm, "input");
         RemoveTest(_vm);
       });
+    });
+    it("可以传入name", () => {
+      const _vm = _CreateTest({ propsData: { name: "input" } });
+      const inputElement = _vm.$el.querySelector("input");
+      expect(inputElement && inputElement.name).to.eq("input");
+      RemoveTest(_vm);
     });
     it("可以传入disabled禁止输入", () => {
       [true, false].forEach(disabled => {
@@ -141,20 +147,6 @@ describe("Input", () => {
           }
         });
         HeightTest(_vm, key);
-        RemoveTest(_vm);
-      });
-    });
-    it("可以传入password来开启密码模式", () => {
-      [null, 123, "123", undefined].forEach(key => {
-        const _vm = _CreateTest({
-          propsData: {
-            value: key,
-            password: true
-          }
-        });
-        const inputElement = _vm.$el.querySelector("input");
-        expect(inputElement && inputElement.type).to.eq("password");
-        IconClickTest(_vm, key, key ? "lzh-eye-hidden" : "");
         RemoveTest(_vm);
       });
     });
@@ -194,6 +186,27 @@ describe("Input", () => {
       IconPositionTest(_vm, 1, "left");
       RemoveTest(_vm);
     });
+    it("可以传入placeholder占位位子", () => {
+      const _vm = _CreateTest({
+        propsData: {
+          placeholder: "占位文字"
+        }
+      });
+      const inputElement = _vm.$el.querySelector("input");
+      expect(inputElement && inputElement.placeholder).to.eq("占位文字");
+    });
+    it("可以传入full撑满父容器", () => {
+      const _vm = _CreateTest({
+        propsData: {
+          full: true
+        }
+      });
+      const _vm_width = window.getComputedStyle(_vm.$el).width;
+      const parent = _vm.$el.parentElement;
+      const parent_width = parent && window.getComputedStyle(parent).width;
+      expect(_vm_width).to.eq(parent_width);
+    });
+
     describe("传入clear开启清除按钮,并可以同时传入其他icon", () => {
       let _vm: Vue;
       const iconLeft = "lzh-left-arrow";

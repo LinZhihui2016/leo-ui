@@ -10,7 +10,6 @@
       v-model="_value"
       :disabled="disabled"
       :readonly="readonly"
-      :autofocus="autofocus"
       :name="name"
       :placeholder="placeholder"
       class="leo-input"
@@ -83,9 +82,7 @@ export default Vue.extend({
     password: {
       type: Boolean
     },
-    autofocus: {
-      type: Boolean
-    },
+
     placeholder: {
       type: String
     },
