@@ -60,7 +60,7 @@ export default {
 
 <style lang="scss" scoped>
 .leo-button-group {
-  .leo-button {
+  .leo-button:not(.leo-button--full-width) {
     & + .leo-button {
       margin-left: -1px;
     }

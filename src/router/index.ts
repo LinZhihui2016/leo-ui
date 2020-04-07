@@ -20,6 +20,11 @@ const routes = [
     path: "/input",
     name: "input",
     component: () => import("views/Input.vue")
+  },
+  {
+    path: "/grid",
+    name: "grid",
+    component: () => import("views/Grid.vue")
   }
 ];
 

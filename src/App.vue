@@ -7,6 +7,9 @@
       <router-link to="/input">
         Input
       </router-link>
+      <router-link to="/grid">
+        grid
+      </router-link>
     </header>
     <router-view class="flex-center"></router-view>
   </div>
