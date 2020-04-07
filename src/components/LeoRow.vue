@@ -33,5 +33,6 @@ export default {
 <style lang="scss">
 .leo-row {
   display: flex;
+  flex-wrap: wrap;
 }
 </style>

@@ -7,7 +7,9 @@
 export default {
   props: {
     span: [Number, String],
-    preSpan: [Number, String]
+    preSpan: [Number, String],
+    forward: Number,
+    backward: Number
   },
   data() {
     return {
@@ -25,10 +27,12 @@ export default {
       return style;
     },
     classList() {
-      const { span, preSpan } = this;
+      const { span, preSpan, forward, backward } = this;
       return [
         span && `leo-col--span-${span}`,
-        preSpan && `leo-col--pre-${preSpan}`
+        preSpan && `leo-col--pre-${preSpan}`,
+        forward && `leo-col--forward-${forward}`,
+        backward && `leo-col--backward-${backward}`
       ];
     }
   }
@@ -37,12 +41,19 @@ export default {
 <style lang="scss">
 .leo-col {
   width: 100%;
+  position: relative;
   @for $n from 1 through 24 {
     &.leo-col--span-#{$n} {
       width: ($n / 24) * 100%;
     }
     &.leo-col--pre-#{$n} {
       margin-left: ($n/24) * 100%;
+    }
+    &.leo-col--forward-#{$n} {
+      left: ($n/24) * 100%;
+    }
+    &.leo-col--backward-#{$n} {
+      right: ($n/24) * 100%;
     }
   }
 }

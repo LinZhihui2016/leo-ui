@@ -34,11 +34,9 @@
         <leo-col :span="4"
           ><div class="grid-content bg-purple-light"></div
         ></leo-col>
-        <leo-col :span="4"><div class="grid-content bg-purple"></div></leo-col>
-        <leo-col :span="4"
-          ><div class="grid-content bg-purple-light"></div
+        <leo-col :span="4" :backward="1"
+          ><div class="grid-content bg-purple"></div
         ></leo-col>
-        <leo-col :span="4"><div class="grid-content bg-purple"></div></leo-col>
         <leo-col :span="4"
           ><div class="grid-content bg-purple-light"></div
         ></leo-col>
