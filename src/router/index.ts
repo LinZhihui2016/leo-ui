@@ -25,6 +25,11 @@ const routes = [
     path: "/grid",
     name: "grid",
     component: () => import("views/Grid.vue")
+  },
+  {
+    path: "/layout",
+    name: "layout",
+    component: () => import("views/Layout.vue")
   }
 ];
 

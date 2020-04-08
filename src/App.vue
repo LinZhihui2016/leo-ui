@@ -10,6 +10,9 @@
       <router-link to="/grid">
         grid
       </router-link>
+      <router-link to="/layout">
+        layout
+      </router-link>
     </header>
     <router-view class="flex-center"></router-view>
   </div>
@@ -29,5 +32,8 @@ header {
   a {
     display: block;
   }
+}
+.flex-center {
+  height: 100%;
 }
 </style>
