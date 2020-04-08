@@ -52,8 +52,8 @@ export default {
       return [
         ...transformObject({ span, pre, forward, backward }),
         ...transformObject(mobile, "mobile"),
-        ...transformObject(narrowPc, "mobile"),
-        ...transformObject(pad, "mobile")
+        ...transformObject(narrowPc, "narrowPc"),
+        ...transformObject(pad, "pad")
       ];
     }
   }
