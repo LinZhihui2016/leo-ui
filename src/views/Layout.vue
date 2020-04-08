@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <leo-container>
-      <leo-aside width="20%">aside</leo-aside>
+      <leo-header>header</leo-header>
       <leo-container>
-        <leo-header>header</leo-header>
+        <leo-aside width="20%">aside</leo-aside>
         <leo-content>content</leo-content>
-        <leo-footer>footer</leo-footer>
       </leo-container>
+      <leo-footer>footer</leo-footer>
     </leo-container>
   </div>
 </template>

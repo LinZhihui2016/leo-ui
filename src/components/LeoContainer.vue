@@ -17,10 +17,10 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .leo-container {
-  border: 1px solid red;
   flex-grow: 1;
   display: flex;
   height: 100%;
+  box-sizing: border-box;
   flex-direction: column;
   &.leo-container--aside {
     flex-direction: row;

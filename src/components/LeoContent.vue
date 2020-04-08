@@ -12,6 +12,7 @@ export default Vue.extend({});
 <style lang="scss" scoped>
 .leo-content {
   width: 100%;
+  box-sizing: border-box;
   flex: 1;
   background: lightseagreen;
 }
