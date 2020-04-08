@@ -2,8 +2,7 @@ import Vue from "vue";
 
 export const CreateTest = (
   prop: Object,
-  Component: Vue.VueConstructor | Vue.VueConstructor[],
-  template?: string
+  Component: Vue.VueConstructor
 ): Vue => {
   let div = document.querySelector("#test");
   if (!div) {
@@ -14,8 +13,7 @@ export const CreateTest = (
 
   const Constuctor = Vue.extend(Component);
   const _vm = new Constuctor({
-    ...prop,
-    template
+    ...prop
   }).$mount(div);
   return _vm;
 };

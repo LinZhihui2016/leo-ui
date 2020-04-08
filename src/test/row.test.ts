@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import { describe, it } from "mocha";
 import spies from "chai-spies";
-import sinon from "sinon";
 import sinonChai from "sinon-chai";
 import Vue from "vue";
 import LeoRow from "components/LeoRow.vue";
@@ -12,7 +11,6 @@ chai.use(sinonChai);
 Vue.config.productionTip = false;
 Vue.config.devtools = false;
 Vue.component("leo-col", LeoCol);
-Vue.component("leo-row", LeoRow);
 const _CreateTest = (prop?: Object): Vue => {
   return CreateTest(prop || {}, LeoRow);
 };
