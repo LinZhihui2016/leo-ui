@@ -58,6 +58,19 @@ describe("Col", () => {
       const pre = 3;
       const forward = 2;
       const backward = 1;
+      let obj: {
+        [key: string]: number;
+      } = {
+        span: 1,
+        pre: 2,
+        forward: 3,
+        backward: 4
+      };
+      const classTestAll = (el: Element, Media: Media) => {
+        Object.keys(obj).forEach(key => {
+          classTest(el, className(key, obj[key], Media));
+        });
+      };
       describe("mobile接收数字或者对象", () => {
         it("接收数字", () => {
           let mobileSpan = 5;
@@ -69,27 +82,15 @@ describe("Col", () => {
           RemoveTest(_vm);
         });
         it("接收对象", () => {
-          let mobileObj = {
-            span: 1,
-            pre: 2,
-            forward: 3,
-            backward: 4
-          };
           const _vm = _CreateTest({
-            propsData: { span, pre, forward, backward, mobile: mobileObj }
+            propsData: { span, pre, forward, backward, mobile: obj }
           });
           classTest(_vm.$el, className("span", span, ""));
           classTest(_vm.$el, className("pre", pre, ""));
           classTest(_vm.$el, className("forward", forward, ""));
           classTest(_vm.$el, className("backward", backward, ""));
 
-          classTest(_vm.$el, className("span", mobileObj.span, "mobile"));
-          classTest(_vm.$el, className("pre", mobileObj.pre, "mobile"));
-          classTest(_vm.$el, className("forward", mobileObj.forward, "mobile"));
-          classTest(
-            _vm.$el,
-            className("backward", mobileObj.backward, "mobile")
-          );
+          classTestAll(_vm.$el, "mobile");
           RemoveTest(_vm);
         });
       });
@@ -104,27 +105,18 @@ describe("Col", () => {
           RemoveTest(_vm);
         });
         it("接收对象", () => {
-          let padObj = {
-            span: 1,
-            pre: 2,
-            forward: 3,
-            backward: 4
-          };
           const _vm = _CreateTest({
-            propsData: { span, pre, forward, backward, pad: padObj }
+            propsData: { span, pre, forward, backward, pad: obj }
           });
           classTest(_vm.$el, className("span", span, ""));
           classTest(_vm.$el, className("pre", pre, ""));
           classTest(_vm.$el, className("forward", forward, ""));
           classTest(_vm.$el, className("backward", backward, ""));
-
-          classTest(_vm.$el, className("span", padObj.span, "pad"));
-          classTest(_vm.$el, className("pre", padObj.pre, "pad"));
-          classTest(_vm.$el, className("forward", padObj.forward, "pad"));
-          classTest(_vm.$el, className("backward", padObj.backward, "pad"));
+          classTestAll(_vm.$el, "pad");
           RemoveTest(_vm);
         });
       });
+
       describe("narrowPc接收数字或者对象", () => {
         it("接收数字", () => {
           let narrowPcSpan = 5;
@@ -136,30 +128,15 @@ describe("Col", () => {
           RemoveTest(_vm);
         });
         it("接收对象", () => {
-          let narrowPcObj = {
-            span: 1,
-            pre: 2,
-            forward: 3,
-            backward: 4
-          };
           const _vm = _CreateTest({
-            propsData: { span, pre, forward, backward, narrowPc: narrowPcObj }
+            propsData: { span, pre, forward, backward, narrowPc: obj }
           });
           classTest(_vm.$el, className("span", span, ""));
           classTest(_vm.$el, className("pre", pre, ""));
           classTest(_vm.$el, className("forward", forward, ""));
           classTest(_vm.$el, className("backward", backward, ""));
 
-          classTest(_vm.$el, className("span", narrowPcObj.span, "narrowPc"));
-          classTest(_vm.$el, className("pre", narrowPcObj.pre, "narrowPc"));
-          classTest(
-            _vm.$el,
-            className("forward", narrowPcObj.forward, "narrowPc")
-          );
-          classTest(
-            _vm.$el,
-            className("backward", narrowPcObj.backward, "narrowPc")
-          );
+          classTestAll(_vm.$el, "narrowPc");
           RemoveTest(_vm);
         });
       });
