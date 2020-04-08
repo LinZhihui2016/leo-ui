@@ -24,6 +24,7 @@ module.exports = {
     "no-undef": 0,
     "no-unexpected-multiline": 2,
     "no-unused-vars": 2,
+    "no-case-declarations":0,
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
   },

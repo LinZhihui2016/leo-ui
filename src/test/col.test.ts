@@ -11,6 +11,7 @@ Vue.config.productionTip = false;
 Vue.config.devtools = false;
 type Media = "" | "mobile" | "pad" | "narrowPc";
 const _CreateTest = (prop = {}): Vue => CreateTest(prop, LeoCol);
+
 const classTest = (el: Element, className: string) => {
   let classList = el.className.split(" ");
   expect(classList).to.include(className);

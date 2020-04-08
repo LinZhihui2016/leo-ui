@@ -1,9 +1,16 @@
 import Vue from "vue";
 
+export const CreateTestWithTemplate = (template?: string) => {
+  let div = document.createElement("div");
+  document.body.appendChild(div);
+  template && (div.innerHTML = template);
+  const _vm = new Vue({ el: div });
+  return _vm;
+};
+
 export const CreateTest = (
   prop: Object,
-  Component: Vue.VueConstructor,
-  template?: string
+  Component: Vue.VueConstructor
 ): Vue => {
   let div = document.querySelector("#test");
   if (!div) {
@@ -11,11 +18,9 @@ export const CreateTest = (
     div.id = "test";
     document.body.appendChild(div);
   }
-
   const Constuctor = Vue.extend(Component);
   const _vm = new Constuctor({
-    ...prop,
-    template
+    ...prop
   }).$mount(div);
   return _vm;
 };

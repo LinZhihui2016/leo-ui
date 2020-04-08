@@ -5,6 +5,7 @@ function resolve(dir) {
 }
 
 module.exports = {
+  runtimeCompiler: true,
   publicPath: "/",
   assetsDir: "publice",
   outputDir: "./dists/", // 打包的目录

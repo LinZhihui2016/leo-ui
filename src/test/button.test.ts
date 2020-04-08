@@ -143,7 +143,7 @@ const TYPE: Array<Type> = [
 ];
 const SIZE: Array<Size> = ["small", "medium", "large", "giant"];
 const _CreateTest = (prop?: Object): Vue => {
-  return CreateTest(prop || {}, LeoButton, "xx");
+  return CreateTest(prop || {}, LeoButton);
 };
 
 const IconTest = (icon: Icon, _vm: Vue): string[] | null => {
