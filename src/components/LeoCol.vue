@@ -4,12 +4,32 @@
   </div>
 </template>
 <script>
+import { isObject } from "@/js/util";
+
+const transformObject = (v, media) => {
+  if (!v) return [];
+  const obj = isObject(v) ? v : { span: v };
+  media = media ? `--${media}` : "";
+  return ["span", "pre", "forward", "backward"]
+    .map(key => obj[key] && `leo-col--${key}-${obj[key]}${media}`)
+    .filter(i => i);
+};
+
 export default {
   props: {
     span: [Number, String],
-    preSpan: [Number, String],
+    pre: [Number, String],
     forward: Number,
-    backward: Number
+    backward: Number,
+    mobile: {
+      type: [Object, Number, String]
+    },
+    pad: {
+      type: [Object, Number, String]
+    },
+    narrowPc: {
+      type: [Object, Number, String]
+    }
   },
   data() {
     return {
@@ -27,12 +47,13 @@ export default {
       return style;
     },
     classList() {
-      const { span, preSpan, forward, backward } = this;
+      const { span, pre, forward, backward } = this;
+      let { mobile, narrowPc, pad } = this;
       return [
-        span && `leo-col--span-${span}`,
-        preSpan && `leo-col--pre-${preSpan}`,
-        forward && `leo-col--forward-${forward}`,
-        backward && `leo-col--backward-${backward}`
+        ...transformObject({ span, pre, forward, backward }),
+        ...transformObject(mobile, "mobile"),
+        ...transformObject(narrowPc, "mobile"),
+        ...transformObject(pad, "mobile")
       ];
     }
   }
@@ -41,19 +62,79 @@ export default {
 <style lang="scss">
 .leo-col {
   width: 100%;
+  box-sizing: border-box;
   position: relative;
   @for $n from 1 through 24 {
+    $standWith: ($n / 24) * 100%;
     &.leo-col--span-#{$n} {
-      width: ($n / 24) * 100%;
+      width: $standWith;
     }
     &.leo-col--pre-#{$n} {
-      margin-left: ($n/24) * 100%;
+      margin-left: $standWith;
     }
     &.leo-col--forward-#{$n} {
-      left: ($n/24) * 100%;
+      left: $standWith;
     }
     &.leo-col--backward-#{$n} {
-      right: ($n/24) * 100%;
+      right: $standWith;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .leo-col {
+    @for $n from 1 through 24 {
+      $standWith: ($n / 24) * 100%;
+      &.leo-col--span-#{$n}--mobile {
+        width: $standWith;
+      }
+      &.leo-col--pre-#{$n}--mobile {
+        margin-left: $standWith;
+      }
+      &.leo-col--forward-#{$n}--mobile {
+        left: $standWith;
+      }
+      &.leo-col--backward-#{$n}--mobile {
+        right: $standWith;
+      }
+    }
+  }
+}
+@media screen and (max-width: 992px) {
+  .leo-col {
+    @for $n from 1 through 24 {
+      $standWith: ($n / 24) * 100%;
+      &.leo-col--span-#{$n}--pad {
+        width: $standWith;
+      }
+      &.leo-col--pre-#{$n}--pad {
+        margin-left: $standWith;
+      }
+      &.leo-col--forward-#{$n}--pad {
+        left: $standWith;
+      }
+      &.leo-col--backward-#{$n}--pad {
+        right: $standWith;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1200px) {
+  .leo-col {
+    @for $n from 1 through 24 {
+      $standWith: ($n / 24) * 100%;
+      &.leo-col--span-#{$n}--narrowPc {
+        width: $standWith;
+      }
+      &.leo-col--pre-#{$n}--narrowPc {
+        margin-left: $standWith;
+      }
+      &.leo-col--forward-#{$n}--narrowPc {
+        left: $standWith;
+      }
+      &.leo-col--backward-#{$n}--narrowPc {
+        right: $standWith;
+      }
     }
   }
 }

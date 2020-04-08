@@ -6,38 +6,14 @@
           ><div class="grid-content bg-purple-dark"></div
         ></leo-col>
       </leo-row>
-      <leo-row gutter="20">
-        <leo-col :span="12"><div class="grid-content bg-purple"></div></leo-col>
-        <leo-col :span="12"
-          ><div class="grid-content bg-purple-light"></div
-        ></leo-col>
-      </leo-row>
-      <leo-row gutter="20">
-        <leo-col :span="8"><div class="grid-content bg-purple"></div></leo-col>
-        <leo-col :span="8"
-          ><div class="grid-content bg-purple-light"></div
-        ></leo-col>
-        <leo-col :span="8"><div class="grid-content bg-purple"></div></leo-col>
-      </leo-row>
-      <leo-row gutter="20">
-        <leo-col :span="6"><div class="grid-content bg-purple"></div></leo-col>
-        <leo-col :span="6"
-          ><div class="grid-content bg-purple-light"></div
-        ></leo-col>
-        <leo-col :span="6"><div class="grid-content bg-purple"></div></leo-col>
-        <leo-col :span="6"
-          ><div class="grid-content bg-purple-light"></div
-        ></leo-col>
-      </leo-row>
-      <leo-row gutter="20">
-        <leo-col :span="4"><div class="grid-content bg-purple"></div></leo-col>
-        <leo-col :span="4"
-          ><div class="grid-content bg-purple-light"></div
-        ></leo-col>
-        <leo-col :span="4" :backward="1"
+      <leo-row gutter="20" justify="flex-end">
+        <leo-col :span="1" :mobile="{ span: 4, pre: 4 }"
           ><div class="grid-content bg-purple"></div
         ></leo-col>
-        <leo-col :span="4"
+        <leo-col :span="2"
+          ><div class="grid-content bg-purple-light"></div
+        ></leo-col>
+        <leo-col :span="3"
           ><div class="grid-content bg-purple-light"></div
         ></leo-col>
       </leo-row>
@@ -62,9 +38,9 @@ export default Vue.extend({
   background: #ccc;
 }
 .container {
-  width: 960px;
+  width: 100%;
+  max-width: 960px;
   margin: 0 auto;
-  border: 5px solid red;
 }
 </style>
 

@@ -7,15 +7,31 @@
 export default {
   props: {
     gutter: [Number, String],
-    justify: String,
-    align: String
+    justify: {
+      type: String,
+      validator(v) {
+        return [
+          "flex-start",
+          "flex-end",
+          "center",
+          "space-around",
+          "space-between"
+        ].includes(v);
+      }
+    },
+    align: {
+      type: String,
+      validator(v) {
+        return ["flex-start", "flex-end", "center"].includes(v);
+      }
+    }
   },
   computed: {
     style() {
       const { justify, align, gutter } = this;
       let style = {};
-      justify && (style.justify = justify);
-      align && (style.align = align);
+      justify && (style.justifyContent = justify);
+      align && (style.alignItems = align);
       if (gutter) {
         style.marginLeft = `-${gutter / 2}px`;
         style.marginRight = `-${gutter / 2}px`;
